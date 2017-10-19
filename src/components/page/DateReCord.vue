@@ -42,7 +42,7 @@
             <hr>
             <!--表格区-->
             <div class="orderTable">
-                <el-table ref="multipleTable" :data="orderList" border tooltip-effect="dark" style="width: 100%" v-loading="listLoading" element-loading-text="拼命加载中" @selection-change="handleSelectionChange">
+                <el-table ref="multipleTable" :data="orderList" border tooltip-effect="dark" style="width: 100%" v-loading="listLoading" element-loading-text="拼命加载中" >
                     <el-table-column label="基地" prop="OrganizeName" width="120">
                     </el-table-column>
                     <el-table-column label="开销·（元）" prop="AccountsCost" width="170">
@@ -154,7 +154,7 @@ export default {
                 name: '',
                 region: ''
             },
-            isEditTime:false  // 是否编辑时间
+            isEditTime:false  // 是否编辑状态
         }
     },
     components: {
@@ -355,12 +355,13 @@ export default {
         ajaxSaveOrder() {
             let _this = this;
             //ajax保存修改的数据
-            // console.log(this.singleOrderList);
+            // console.log(this.singleOrderList.AccountsId);
             let qs = require("qs");
             axios.post(this.$store.state.dateRecordSaveJsonUrl, qs.stringify({
                 params: {
                     __RequestVerificationToken: this.$store.state.token,
                     keyValue: this.singleOrderList.OrderId, //单条订单ID
+                    AccountsId: this.singleOrderList.AccountsId, //单条记录ID
                     Accounts: this.singleOrderList         //单条订单集
                 }
             }))

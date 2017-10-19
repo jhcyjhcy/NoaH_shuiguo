@@ -14,11 +14,8 @@ Vue.config.productionTip = false;
 import NProgress from "nprogress"; // Progress 进度条
 import "nprogress/nprogress.css"; // Progress 进度条样式
 import store from "@/store/index";
-import {
-  Message
-} from "element-ui";
-import LoginTimeOut from '@/utils/LoginTimeOut'
-
+import { Message } from "element-ui";
+import LoginTimeOut from "@/utils/LoginTimeOut";
 
 router.beforeEach((to, from, next) => {
   // 页面跳转前，先判断用户在当前页面是否还有未完成操作？
@@ -38,17 +35,21 @@ router.beforeEach((to, from, next) => {
     if (store.state.token) {
       // 通过vuex state获取当前的token是否存在
       // 判断登录是否过期
-      if (LoginTimeOut.isExpired('userinfo')) {
-        console.log('登录过期');
+      if (LoginTimeOut.isExpired("userinfo")) {
+        console.log("登录过期");
         // 登录过期
         Message({
           message: "上次登录超过半小时了，请重新登录!",
           type: "error"
         });
-        next('/login');
+        next("/login");
         //return false;
       } else {
         next();
+        LoginTimeOut.maxAge(1000 * 60 * 30).set("userinfo", {
+          name: "jhcy",
+          age: "18"
+        });
       }
     } else {
       next({
