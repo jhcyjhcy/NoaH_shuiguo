@@ -1,4 +1,4 @@
-# Noah
+﻿# Noah
 
 > 一个水果基地项目。
 ## 相关技术
@@ -14,3 +14,5 @@ npm run dev
 
 # build for production with minification（打包）
 npm run build
+=======
+# NoaH_shuiguo
